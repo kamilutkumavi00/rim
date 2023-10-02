@@ -1,5 +1,4 @@
-mod window;
-use window::Window;
+use crate::window::Window;
 use std::collections::HashMap;
 pub struct Screen {
     height: u16,
@@ -27,8 +26,8 @@ impl Screen {
         }
     }
 
-    pub fn add(mut self, name: String, start: (u16, u16), size: (u16, u16)) -> Self{
-        let window = Window::new(name, Vec::new(), start, size);
+    pub fn add(mut self, window: Window) -> Self{
+        //let window = Window::new(name, Vec::new(), start, size);
         self.window_vec.push(window);
         Self{
             height: self.height,
