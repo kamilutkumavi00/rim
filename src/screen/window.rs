@@ -1,4 +1,4 @@
-use crate::app;
+//use crate::app::App;
 #[derive(Clone, Debug)]
 pub struct Window{
     name: String,
@@ -6,7 +6,7 @@ pub struct Window{
     pub start: (u16, u16),
     pub size: (u16, u16),
     pub visual_line: Vec<String>,
-    loc: (u16, u16, u16, u16), //(x, y, x_s, y_s)
+
 }
 
 fn window_framer(size: (u16, u16), visual_line: Vec<String>) -> Vec<String>{ // there is going to have a hash map for boxes
@@ -41,25 +41,12 @@ fn window_framer(size: (u16, u16), visual_line: Vec<String>) -> Vec<String>{ // 
 
 impl Window{
     pub fn new(name: String, lines: Vec<String>, start: (u16, u16), size: (u16, u16)) -> Self{
-        let mut yazi: Vec<String> = Vec::new();
-        let mut numara: Vec<String> = Vec::new();
-        numara.push("1".to_string());
-        numara.push("2".to_string());
-        numara.push("3".to_string());
-        numara.push("4".to_string());
-        yazi.push("Selam Arkadaşlar nasılsınız bende iyiyim inşallah".to_string());
-        yazi.push("Benim adım".to_string());
-        yazi.push("Kamil Utku".to_string());
-        yazi.push("Mavi".to_string());
-
-        let temp: Vec<String> = window_framer(size, yazi);
-        Self { name: name, lines: lines, start: start, size: size, visual_line: temp, loc:(0,0,0,0)}
+        Self { name: name, lines: lines, start: start, size: size, visual_line: Vec::new()}
     }
 
-    //pub fn add(){}
-
-    pub fn update(self) -> Self{
-        Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: self.visual_line, loc: self.loc}
+    pub fn update(self) -> Self{ //motionlar kontrol edilecek ve visual appten çekilecek
+        let temp: Vec<String> = window_framer(self.size, self.visual_line);
+        Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: temp}
     }
 
     //pub fn motions() -> Self {}
