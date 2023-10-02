@@ -1,5 +1,6 @@
 mod window;
 use window::Window;
+use std::collections::HashMap;
 pub struct Screen {
     height: u16,
     width: u16,
@@ -9,7 +10,7 @@ pub struct Screen {
 
 impl Screen {
     pub fn new() -> Self {
-        let (width, height) = (214,15);//terminal::size().unwrap();
+        let (width, height) = (214,10);//terminal::size().unwrap();
         let mut interface = String::new();
         for _i in 0..height {
             for _j in 0..width {
@@ -47,9 +48,7 @@ impl Screen {
     }
 
     pub fn render(self){
-        let mut chr_vec: Vec<char>= Vec::new();
-        let mut idx_vec: Vec<u16> = Vec::new();
-
+        let mut map: HashMap<u16, char> = HashMap::new();
         for k in 0..self.window_vec.len(){
             for i in 0..self.height {
                 for j in 0..self.width {
@@ -63,32 +62,25 @@ impl Screen {
                             } else {
                                 ' '
                             };
-                            chr_vec.push(a);
-                            idx_vec.push(j + (i) * (self.width + 2));
+                            map.insert(j + (i) * (self.width + 2), a);
                         }
                     }
                 }
             }
         }
-        let interface = replacer_total(self.interface, chr_vec, idx_vec);
+        let interface = screen_framer(&self.interface, map);
         println!("{}", interface);
     }
 }
 
-fn replacer_total(text: String, chr_vec: Vec<char>, idx_vec: Vec<u16>) -> String{
+fn screen_framer(text: &String, map: HashMap<u16, char>) -> String{
     let mut text_output = String::new();
-    let mut c = 0;
     for(i, j) in text.chars().enumerate(){
-        if c < idx_vec.len(){
-            if idx_vec[c] != i as u16{
-                text_output.push(j);
-            } else {
-                text_output.push(chr_vec[c]);
-                c += 1;
-            }
-        }  else{
+        if map.get(&(i as u16)).is_some(){
+            text_output.push(*map.get(&(i as u16)).unwrap());
+        } else {
             text_output.push(j);
-        }       
+        }
     }
     text_output
 }
