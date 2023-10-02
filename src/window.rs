@@ -1,4 +1,4 @@
-//use crate::app::App;
+use crate::app::App;
 #[derive(Clone, Debug)]
 pub struct Window{
     name: String,
@@ -6,7 +6,7 @@ pub struct Window{
     pub start: (u16, u16),
     pub size: (u16, u16),
     pub visual_line: Vec<String>,
-
+    app_vec: Vec<App>,
 }
 
 fn window_framer(size: (u16, u16), visual_line: Vec<String>) -> Vec<String>{ // there is going to have a hash map for boxes
@@ -41,12 +41,12 @@ fn window_framer(size: (u16, u16), visual_line: Vec<String>) -> Vec<String>{ // 
 
 impl Window{
     pub fn new(name: String, lines: Vec<String>, start: (u16, u16), size: (u16, u16)) -> Self{
-        Self { name: name, lines: lines, start: start, size: size, visual_line: Vec::new()}
+        Self { name: name, lines: lines, start: start, size: size, visual_line: Vec::new(), app_vec: Vec::new()}
     }
 
     pub fn update(self) -> Self{ //motionlar kontrol edilecek ve visual appten çekilecek
         let temp: Vec<String> = window_framer(self.size, self.visual_line);
-        Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: temp}
+        Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: temp, app_vec: self.app_vec}
     }
 
     //pub fn motions() -> Self {}
