@@ -10,7 +10,7 @@ pub struct Screen {
 
 impl Screen {
     pub fn new() -> Self {
-        let (width, height) = (214,10);//terminal::size().unwrap();
+        let (width, height) = (200,10);//terminal::size().unwrap();
         let mut interface = String::new();
         for _i in 0..height {
             for _j in 0..width {
