@@ -1,4 +1,5 @@
 use crate::app::App;
+
 #[derive(Clone, Debug)]
 pub struct Window{
     name: String,

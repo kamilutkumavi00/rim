@@ -68,7 +68,7 @@ impl Screen {
             }
         }
         let interface = screen_framer(&self.interface, map);
-        println!("{}", interface);
+        //println!("{}", interface);
     }
 }
 
