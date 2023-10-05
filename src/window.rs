@@ -51,7 +51,7 @@ impl Window{
     }
 
     pub fn update(self) -> Self { //motionlar kontrol edilecek ve visual appten çekilecek
-        make_dic(&self.app_vec, self.size);
+        make_dict(&self.app_vec, self.size);
         let temp: Vec<String> = window_framer(self.size, self.visual_line);
         Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: temp, app_vec: self.app_vec}
     }
@@ -59,7 +59,7 @@ impl Window{
     //pub fn motions() -> Self {}
 }
 
-fn make_dic(app: &Vec<App>, size: (u16, u16)){
+fn make_dict(app: &Vec<App>, size: (u16, u16)){
     let mut temp: HashMap<(u16,u16), char> = HashMap::new();
     for i in app{
         for j in 0..size.1{
