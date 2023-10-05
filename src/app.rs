@@ -1,9 +1,9 @@
 #[derive(Clone, Debug)]
 pub struct App{
-    start: (u16, u16),
-    size: (u16, u16),
+    pub start: (u16, u16),
+    pub size: (u16, u16),
     data: Vec<String>,
-    visual_data: Vec<String>,
+    pub visual_data: Vec<String>,
     loc: (u16, u16, u16, u16),
     motion_fn: fn((u16, u16, u16, u16)) -> (u16, u16, u16, u16),
 }
@@ -12,11 +12,11 @@ impl App{
     pub fn new(
     start: (u16, u16),
     size: (u16, u16),
+    data: Vec<String>,
     loc: (u16, u16, u16, u16),
     motion_fn: fn((u16, u16, u16, u16)) -> (u16, u16, u16, u16),
     )-> Self{
-        let data = Vec::new();
-        let virtual_data = Vec::new();
+        let virtual_data = data.clone();
         Self { start: start, size: size, data: data, visual_data: virtual_data, loc: loc, motion_fn: motion_fn}
     }
 

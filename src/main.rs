@@ -17,18 +17,19 @@ fn main() {
     vector.push(String::from("Kamil Utku"));
     vector.push(String::from("Kamil Utku"));
     vector.push(String::from("Kamil Utku"));
-    let dv = visuals((4,0), (5,5), vector);
+    let dv = visuals((0,0), (5,5), vector);
+
     let mut screen = Screen::new();
 
     let mut text_editor = Window::new("Text Editor".to_string(), Vec::new(), (50,0), (50,8));
-    text_editor.visual_line = dv;
-    let a = App::new((0,0), (1,1), (0,0,0,0), motions);
+    let a = App::new((0,0), (10,10),dv ,(0,0,0,0), motions);
+    text_editor = text_editor.add(a);
     screen = screen.add(text_editor);
 
 
-    let file_explorer = Window::new("File Explorer".to_string(), Vec::new(), (0,0), (10,10));
-    screen = screen.add(file_explorer);
+    // let file_explorer = Window::new("File Explorer".to_string(), Vec::new(), (0,0), (10,10));
+    // screen = screen.add(file_explorer);
 
     screen = screen.update();
-    screen.render();
+    // screen.render();
 }

@@ -1,5 +1,5 @@
 use crate::app::App;
-
+use std::collections::HashMap;
 #[derive(Clone, Debug)]
 pub struct Window{
     name: String,
@@ -45,11 +45,35 @@ impl Window{
         Self { name: name, lines: lines, start: start, size: size, visual_line: Vec::new(), app_vec: Vec::new()}
     }
 
+    pub fn add(mut self, app: App) -> Self{
+        self.app_vec.push(app);
+        Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: self.visual_line, app_vec: self.app_vec}
+    }
+
     pub fn update(self) -> Self { //motionlar kontrol edilecek ve visual appten çekilecek
+        make_dic(&self.app_vec, self.size);
         let temp: Vec<String> = window_framer(self.size, self.visual_line);
         Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: temp, app_vec: self.app_vec}
     }
 
     //pub fn motions() -> Self {}
+}
 
+fn make_dic(app: &Vec<App>, size: (u16, u16)){
+    let mut temp: HashMap<(u16,u16), char> = HashMap::new();
+    for i in app{
+        for j in 0..size.1{
+            for k in 0..size.0{
+                if (j >= i.start.1 && j < i.start.1 + i.size.1) && (k >= i.start.0 && k < i.start.0 + i.size.0) && j < i.visual_data.len() as u16{
+                    let v = i.visual_data[j as usize - i.start.1 as usize].chars().nth(k as usize - i.start.0 as usize).unwrap_or(' ');
+                    temp.insert((k,j), v);
+                } else {
+                    if temp.get(&(k,j)) == None{
+                        temp.insert((k,j), ' ');
+                    }
+                }
+            }
+        }
+    }
+    dbg!(&temp.get(&(0,0)));
 }
