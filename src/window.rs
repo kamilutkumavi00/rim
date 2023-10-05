@@ -45,7 +45,7 @@ impl Window{
         Self { name: name, lines: lines, start: start, size: size, visual_line: Vec::new(), app_vec: Vec::new()}
     }
 
-    pub fn update(self) -> Self{ //motionlar kontrol edilecek ve visual appten çekilecek
+    pub fn update(self) -> Self { //motionlar kontrol edilecek ve visual appten çekilecek
         let temp: Vec<String> = window_framer(self.size, self.visual_line);
         Self { name: self.name, lines: self.lines, start: self.start, size: self.size, visual_line: temp, app_vec: self.app_vec}
     }
