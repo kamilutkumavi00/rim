@@ -58,7 +58,6 @@ impl Window{
 fn make_dict(app: &Vec<App>, size: (u16, u16)) -> HashMap<(u16, u16), char>{
     let mut temp: HashMap<(u16,u16), char> = HashMap::new();
     for i in app{
-        dbg!(i.visual_data.len());
         for j in 0..size.1{
             for k in 0..size.0{
                 if (j >= i.start.1 && j < i.start.1 + i.size.1) && (k >= i.start.0 && k < i.start.0 + i.size.0) && j - i.start.1 < i.visual_data.len() as u16 {
