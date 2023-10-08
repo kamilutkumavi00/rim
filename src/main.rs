@@ -33,10 +33,10 @@ fn main() {
     let mut screen = Screen::new();
 
     let mut text_editor = Window::new("Text Editor".to_string(), Vec::new(), (80,0), (50,8));
-    let a = App::new((4,1), (10,5),dv ,(0,0,0,0), motions);
-    let b = App::new((1,1), (1,5),dv2 ,(0,0,0,0), motions);
-    text_editor = text_editor.add(a);
-    text_editor = text_editor.add(b);
+    //let a = App::new((4,1), (10,5),dv ,(0,0,0,0), motions);
+    //let b = App::new((1,1), (1,5),dv2 ,(0,0,0,0), motions);
+    //text_editor = text_editor.add(a);
+    //text_editor = text_editor.add(b);
     screen = screen.add(text_editor);
 
 
@@ -48,8 +48,8 @@ fn main() {
     vector.push(String::from("5"));
     let dv2 = visuals((0,0), (1,5), vector);
     let mut file_explorer = Window::new("File Explorer".to_string(), Vec::new(), (0,0), (10,10));
-    let b = App::new((1,1), (1,5),dv2 ,(0,0,0,0), motions);
-    file_explorer = file_explorer.add(b);
+    //let b = App::new((1,1), (1,5),dv2 ,(0,0,0,0), motions);
+    //file_explorer = file_explorer.add(b);
     screen = screen.add(file_explorer);
 
     screen = screen.update();
